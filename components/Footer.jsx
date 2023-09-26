@@ -1,11 +1,11 @@
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Link as MuiLink,
   Stack,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Link from "next/link";
 
 const links = [
