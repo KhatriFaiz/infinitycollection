@@ -4,20 +4,27 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import { Divider, Link as MuiLink } from "@mui/material";
-import { useState } from "react";
+import { ButtonBase, Divider } from "@mui/material";
+import MuiLink from "@mui/material/Link";
+import { useContext, useState } from "react";
 import Link from "next/link";
+import { UserContext } from "./AuthProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase/config";
 
 const navLinks = [
   { label: "home", href: "#" },
   { label: "Products", href: "#" },
   { label: "categories", href: "#" },
-  { label: "login", href: "#" },
-  { label: "signup", href: "#" },
 ];
 
 const NavDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const user = useContext(UserContext);
+  const handleLogout = () => {
+    signOut(auth);
+  };
 
   return (
     <Stack
@@ -62,10 +69,11 @@ const NavDrawer = () => {
             <MuiLink
               component={Link}
               href={link.href}
+              underline="none"
               sx={{
                 paddingInline: 1,
                 paddingBlock: 2,
-                textDecoration: "none",
+                display: "inline-block",
                 color: "#000",
               }}
             >
@@ -74,6 +82,43 @@ const NavDrawer = () => {
             <Divider />
           </Box>
         ))}
+        <Box
+          sx={{
+            paddingInline: 1,
+            paddingBlock: 2,
+            display: "inline-block",
+          }}
+        >
+          {user ? (
+            <ButtonBase
+              sx={{ padding: "8px 16px", border: "1px solid black" }}
+              onClick={handleLogout}
+            >
+              Logout
+            </ButtonBase>
+          ) : (
+            <>
+              <ButtonBase
+                component={Link}
+                href="/login"
+                sx={{
+                  padding: "8px 16px",
+                  border: "1px solid black",
+                  marginRight: 2,
+                }}
+              >
+                Login
+              </ButtonBase>
+              <ButtonBase
+                component={Link}
+                href="/signup"
+                sx={{ padding: "8px 16px", border: "1px solid black" }}
+              >
+                Signup
+              </ButtonBase>
+            </>
+          )}
+        </Box>
       </Drawer>
     </Stack>
   );

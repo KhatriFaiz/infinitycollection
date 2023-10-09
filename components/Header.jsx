@@ -1,13 +1,7 @@
-import {
-  Button,
-  Container,
-  Stack,
-  Typography,
-  Link as MuiLink,
-} from "@mui/material";
-import Link from "next/link";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import SearchBox from "./SearchBox";
 import NavDrawer from "./NavDrawer";
+import AuthHandlers from "./AuthHandlers";
 
 const Header = () => {
   return (
@@ -46,32 +40,7 @@ const Header = () => {
             },
           }}
         >
-          <MuiLink
-            component={Link}
-            href="#"
-            sx={{
-              color: "#000",
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Signup
-          </MuiLink>
-          <MuiLink
-            component={Link}
-            href="#"
-            sx={{
-              color: "#000",
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Login
-          </MuiLink>
+          <AuthHandlers />
 
           <Button
             variant="outlined"

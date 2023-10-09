@@ -1,12 +1,7 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Link as MuiLink,
-  Stack,
-} from "@mui/material";
+import { Box, Container, Typography, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Link from "next/link";
+import MuiLink from "@mui/material/Link";
 
 const links = [
   {

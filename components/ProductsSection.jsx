@@ -11,6 +11,7 @@ import shoes2 from "@/public/shoes2.jpg";
 import shoes3 from "@/public/shoes3.jpg";
 import shoes4 from "@/public/shoes4.jpg";
 import shoes5 from "@/public/shoes5.jpg";
+import ProductGrid from "./ProductGrid";
 
 const products = [
   {
@@ -84,18 +85,7 @@ const ProductsSection = () => {
         >
           Latest Products
         </Typography>
-        <Grid container spacing={5}>
-          {products.map((product) => (
-            <Grid item sm={6} md={4} lg={3} key={product.title}>
-              <ProductCard
-                title={product.title}
-                image={product.image}
-                price={product.price}
-                discountPrice={product.discountPrice}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <ProductGrid products={products} />
       </Container>
     </Box>
   );
