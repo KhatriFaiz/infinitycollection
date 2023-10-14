@@ -8,9 +8,10 @@ const ProductGrid = ({ products }) => {
         <Grid item sm={6} md={4} lg={3} key={product.title}>
           <ProductCard
             title={product.title}
-            image={product.image}
+            image={product.coverImage}
             price={product.price}
             discountPrice={product.discountPrice}
+            slug={product.slug}
           />
         </Grid>
       ))}

@@ -4,15 +4,21 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 
 import Image from "next/image";
-import product from "@/public/product.jpg";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 
-const ProductCard = ({ discountPrice = null, title, image, price }) => {
+const ProductCard = ({ discountPrice = null, title, image, price, slug }) => {
   return (
-    <Card sx={{ boxShadow: "none", border: "1px solid #eee" }}>
-      <CardActionArea component={Link} href="#">
-        <CardMedia sx={{ height: "300px", width: "100%" }}>
+    <Card sx={{ boxShadow: "none" }}>
+      <CardActionArea component={Link} href={`/product/${slug}`}>
+        <CardMedia
+          sx={{
+            height: "300px",
+            width: "100%",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
           <Image
             src={image}
             style={{
@@ -21,11 +27,17 @@ const ProductCard = ({ discountPrice = null, title, image, price }) => {
               objectPosition: "center",
               height: "100%",
             }}
+            fill
             alt="products of this website"
           />
         </CardMedia>
         <CardContent sx={{ marginTop: 1 }}>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography
+            gutterBottom
+            variant="body"
+            fontWeight={700}
+            component="div"
+          >
             {title}
           </Typography>
           {discountPrice ? (
@@ -33,31 +45,34 @@ const ProductCard = ({ discountPrice = null, title, image, price }) => {
               <Typography
                 variant="subtitle1"
                 component="span"
-                color="text.secondary"
-                paddingRight={2}
-                sx={{
-                  textDecoration: "line-through",
-                }}
+                color="#ff8383"
+                sx={{ marginTop: "auto", display: "inline-block" }}
+                paddingRight={1}
+                fontWeight={600}
               >
-                {price}
+                ₹{discountPrice}
               </Typography>
               <Typography
+                color="text.secondary"
                 variant="subtitle1"
                 component="span"
-                color="text.secondary"
-                sx={{ marginTop: "auto", display: "inline-block" }}
+                sx={{
+                  textDecoration: "line-through",
+                  fontSize: "14px",
+                }}
               >
-                {discountPrice}
+                ₹{price}
               </Typography>
             </>
           ) : (
             <Typography
+              fontWeight={600}
               variant="subtitle1"
               component="span"
-              color="text.secondary"
+              color="#ff8383"
               sx={{ marginTop: "auto", display: "inline-block" }}
             >
-              {price}
+              ₹{price}
             </Typography>
           )}
         </CardContent>

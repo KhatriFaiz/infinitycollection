@@ -40,9 +40,7 @@ const Header = () => {
             },
           }}
         >
-          <AuthHandlers />
-
-          <Button
+          {/* <Button
             variant="outlined"
             size="small"
             sx={{
@@ -57,7 +55,8 @@ const Header = () => {
             }}
           >
             Cart
-          </Button>
+          </Button> */}
+          <AuthHandlers />
         </Stack>
         <NavDrawer />
       </Container>

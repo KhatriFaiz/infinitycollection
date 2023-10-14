@@ -1,76 +1,77 @@
 import ProductGrid from "@/components/ProductGrid";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 
-import product1 from "@/public/product1.jpg";
-import product2 from "@/public/product2.jpg";
-import product3 from "@/public/product3.jpg";
-import product4 from "@/public/product4.jpg";
 import ProductImages from "@/components/ProductImages";
+import Link from "next/link";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
+import { db } from "@/firebase/config";
+import { getProductsWithQuery } from "@/app/_lib/getProducts";
 
-const products = [
-  {
-    title: "Van Heusen Men's Regular Fit Polo Shirt",
-    image: product1,
-    price: "₹" + 1099,
-    discountPrice: "₹" + 589,
-  },
-  {
-    title:
-      "Lux Cozi Men's Regular Fit Polo Neck Half Sleeve Soild Casual T-Shirt | Polo T-Shirt for Men",
-    image: product2,
-    price: "₹" + 380,
-    discountPrice: "₹" + 375,
-  },
-  {
-    title: "Max Men's Solid Slim Fit Polo T-Shirt",
-    image: product3,
-    price: "₹" + 499,
-    discountPrice: "₹" + 469,
-  },
-  {
-    title: "Lymio Men T-Shirt, Plain T Shirt",
-    image: product4,
-    price: "₹" + 499,
-    discountPrice: "₹" + 349,
-  },
-];
+const Page = async ({ params }) => {
+  //get main product of the page
+  let product = {};
 
-const Page = () => {
+  const q = query(collection(db, "products"), where("slug", "==", params.slug));
+  const productData = await getDocs(q);
+
+  productData.forEach((doc) => (product = { ...doc.data() }));
+
+  //get products for "latest products" section
+  let products = await getProductsWithQuery(limit(4));
+
   return (
     <main>
       <Container sx={{ paddingBlock: 5 }}>
-        <Grid container spacing={5} marginBottom={8}>
-          <Grid item lg={6}>
-            <ProductImages />
+        <Grid container spacing={{ lg: 5 }} marginBottom={8}>
+          <Grid item lg={6} sm={12} xs={12}>
+            <ProductImages images={[product.coverImage, ...product.images]} />
           </Grid>
-          <Grid item lg={6}>
+          <Grid item lg={6} sm={12}>
             <Typography variant="h3" component="h1" gutterBottom>
-              Sparx Mens Sm-675 Running Shoe
+              {product.title}
             </Typography>
-            <Typography variant="h5" paragraph gutterBottom>
-              ₹999
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "end", gap: 3 }}>
+              <Typography
+                variant="h5"
+                paragraph
+                gutterBottom
+                sx={{ color: "#ff8383" }}
+              >
+                {"₹" + product.discountPrice}
+              </Typography>
+              <Typography
+                paragraph
+                gutterBottom
+                color="text.secondary"
+                sx={{ textDecoration: "line-through" }}
+              >
+                {"₹" + product.price}
+              </Typography>
+            </Box>
             <Stack direction="row" spacing={2} paddingY={3}>
-              <Button fullWidth variant="contained">
+              <Button
+                fullWidth
+                variant="contained"
+                component={Link}
+                href={`/order?productid=${product.id}`}
+              >
                 Buy Now
               </Button>
-              <Button fullWidth variant="outlined">
+              {/* <Button fullWidth variant="outlined">
                 Add to Cart
-              </Button>
+              </Button> */}
             </Stack>
             <Typography variant="h6" component="h3" gutterBottom>
               Descripiton
             </Typography>
             <Typography paragraph gutterBottom>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. At
-              blanditiis impedit cumque harum fugit debitis quam voluptatem
-              excepturi. Possimus, unde.
+              {product.description}
             </Typography>
           </Grid>
         </Grid>
         <Box component="section" paddingY={5}>
           <Typography variant="h4" component="h3" gutterBottom>
-            More from the brand
+            Latest Products
           </Typography>
           <ProductGrid products={products} />
         </Box>
