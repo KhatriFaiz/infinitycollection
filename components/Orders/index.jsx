@@ -38,8 +38,13 @@ const Orders = () => {
   console.log(orders);
 
   return orders.length > 0
-    ? orders.map((item) => (
-        <OrderCard date={item.date} items={item.items} amount={item.amount} />
+    ? orders.map((item, index) => (
+        <OrderCard
+          date={item.date}
+          items={item.items}
+          amount={item.amount}
+          key={index}
+        />
       ))
     : "No orders placed";
 };

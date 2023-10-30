@@ -13,10 +13,11 @@ import Link from "next/link";
 const Cart = () => {
   const uid = useContext(UserContext)?.uid;
   const [products, setProducts] = useState([]);
+  const getProductsFunc = useGetCartProducts;
 
   useEffect(() => {
     if (uid) {
-      useGetCartProducts(uid).then((res) => setProducts(res));
+      getProductsFunc(uid).then((res) => setProducts(res));
     }
   }, [uid]);
 
@@ -28,7 +29,7 @@ const Cart = () => {
       },
       { merge: true }
     ).then(() => {
-      useGetCartProducts(uid).then((res) => setProducts(res));
+      getProductsFunc(uid).then((res) => setProducts(res));
     });
   };
 
@@ -36,7 +37,7 @@ const Cart = () => {
     deleteDoc(doc(db, `users/${uid}/cart/${cartItemDocId}`)).catch((err) =>
       console.log(err)
     );
-    useGetCartProducts(uid).then((res) => setProducts(res));
+    getProductsFunc(uid).then((res) => setProducts(res));
   };
 
   const calculateTotal = () => {

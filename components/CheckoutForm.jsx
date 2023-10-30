@@ -43,6 +43,7 @@ const calculateTotal = (products) => {
 const CheckoutForm = () => {
   const router = useRouter();
   const uid = useContext(UserContext)?.uid;
+  const getProductsFunc = useGetCartProducts;
 
   const textFeildProps = {
     variant: "outlined",
@@ -69,7 +70,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (uid) {
-      useGetCartProducts(uid).then((res) => {
+      getProductsFunc(uid).then((res) => {
         setData((prev) => ({
           ...prev,
           items: [...res],
@@ -87,7 +88,7 @@ const CheckoutForm = () => {
       },
       { merge: true }
     ).then(() => {
-      useGetCartProducts(uid).then((res) => {
+      getProductsFunc(uid).then((res) => {
         setData((prev) => ({
           ...prev,
           items: [...res],
@@ -101,7 +102,7 @@ const CheckoutForm = () => {
     deleteDoc(doc(db, `users/${uid}/cart/${cartItemDocId}`)).catch((err) =>
       console.log(err)
     );
-    useGetCartProducts(uid).then((res) => {
+    getProductsFunc(uid).then((res) => {
       setData((prev) => ({
         ...prev,
         items: [...res],

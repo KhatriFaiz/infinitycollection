@@ -7,8 +7,8 @@ const OrderCard = ({ date, items, amount }) => {
       <header>{date}</header>
       {/* <OrderProductCard />
       <OrderProductCard /> */}
-      {items.map((item) => (
-        <OrderProductCard item={item} />
+      {items.map((item, index) => (
+        <OrderProductCard item={item} key={index} />
       ))}
       <footer>
         Total amount: <b>₹{amount}</b>

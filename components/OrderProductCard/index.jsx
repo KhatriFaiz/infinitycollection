@@ -5,7 +5,12 @@ const OrderProductCard = ({ item }) => {
   return (
     <div className={styles.card_container}>
       <div className={styles.cover_image_container}>
-        <Image src={item.coverImage} className={styles.cover_image} fill />
+        <Image
+          src={item.coverImage}
+          alt={item.title}
+          className={styles.cover_image}
+          fill
+        />
       </div>
       <div className={styles.product_details}>
         <h3 className={styles.product_details_title}>{item.title}</h3>
