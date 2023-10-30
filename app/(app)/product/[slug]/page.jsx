@@ -1,20 +1,24 @@
 import ProductGrid from "@/components/ProductGrid";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
 import ProductImages from "@/components/ProductImages";
-import Link from "next/link";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { getProductsWithQuery } from "@/app/_lib/getProducts";
+import AddToCartButton from "@/components/AddToCartButton";
 
 const Page = async ({ params }) => {
   //get main product of the page
   let product = {};
+  let docId;
 
   const q = query(collection(db, "products"), where("slug", "==", params.slug));
   const productData = await getDocs(q);
 
-  productData.forEach((doc) => (product = { ...doc.data() }));
+  productData.forEach((doc) => {
+    docId = doc.id;
+    product = { ...doc.data() };
+  });
 
   //get products for "latest products" section
   let products = await getProductsWithQuery(limit(4));
@@ -49,17 +53,7 @@ const Page = async ({ params }) => {
               </Typography>
             </Box>
             <Stack direction="row" spacing={2} paddingY={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                component={Link}
-                href={`/order?productid=${product.id}`}
-              >
-                Buy Now
-              </Button>
-              {/* <Button fullWidth variant="outlined">
-                Add to Cart
-              </Button> */}
+              <AddToCartButton productId={docId} />
             </Stack>
             <Typography variant="h6" component="h3" gutterBottom>
               Descripiton

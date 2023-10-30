@@ -2,6 +2,7 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import SearchBox from "./SearchBox";
 import NavDrawer from "./NavDrawer";
 import AuthHandlers from "./AuthHandlers";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -40,9 +41,11 @@ const Header = () => {
             },
           }}
         >
-          {/* <Button
+          <Button
             variant="outlined"
             size="small"
+            component={Link}
+            href="/cart"
             sx={{
               border: "1px solid #000",
               background: "#fff",
@@ -55,7 +58,7 @@ const Header = () => {
             }}
           >
             Cart
-          </Button> */}
+          </Button>
           <AuthHandlers />
         </Stack>
         <NavDrawer />

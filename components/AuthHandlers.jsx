@@ -47,8 +47,9 @@ const UserMenu = ({ handleLogout }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>My orders</MenuItem>
+        <MenuItem onClick={handleClose} component={Link} href="/my-orders">
+          My orders
+        </MenuItem>
         <MenuItem
           onClick={() => {
             handleClose();

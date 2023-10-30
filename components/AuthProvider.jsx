@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
         setUserState(null);
       }
     });
-  }, []);
+  }, [userState]);
 
   return (
     <UserContext.Provider value={userState}>{children}</UserContext.Provider>
