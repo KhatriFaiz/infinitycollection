@@ -35,8 +35,6 @@ const Orders = () => {
     }
   }, [uid]);
 
-  console.log(orders);
-
   return orders.length > 0
     ? orders.map((item, index) => (
         <OrderCard

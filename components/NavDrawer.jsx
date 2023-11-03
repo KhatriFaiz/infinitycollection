@@ -15,7 +15,7 @@ import { ButtonBase, Divider } from "@mui/material";
 
 const navLinks = [
   { label: "home", href: "/" },
-  { label: "My Orders", href: "/my-order" },
+  { label: "My Orders", href: "/my-orders" },
 ];
 
 const NavDrawer = () => {
