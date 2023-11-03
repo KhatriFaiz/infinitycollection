@@ -152,6 +152,7 @@ const NavDrawer = () => {
                 display: "inline-block",
                 color: "#000",
               }}
+              onClick={() => setIsOpen(!isOpen)}
             >
               {link.label}
             </MuiLink>
