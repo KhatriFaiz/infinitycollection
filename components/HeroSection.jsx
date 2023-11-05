@@ -9,7 +9,6 @@ const HeroSection = () => {
       sx={{
         height: "600px",
         position: "relative",
-        marginInline: "-8px",
         display: "flex",
       }}
     >
