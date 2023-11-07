@@ -54,4 +54,4 @@ const LoginFrom = () => {
   );
 };
 
-export default LoginFrom;
+// export default LoginFrom;
