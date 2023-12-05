@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import accountImage from "@/public/account.svg";
+import { useRouter } from "next/navigation";
 
 const UserMenu = ({ handleLogout }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -68,6 +69,7 @@ const AuthHandlers = () => {
 
   const handleLogout = () => {
     signOut(auth);
+    location.reload();
   };
 
   return user ? (
