@@ -2,10 +2,11 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
+import { Typography } from "@mui/material";
+import "../app/styles/tailwind.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Typography } from "@mui/material";
 
 const ProductCard = ({ discountPrice = null, title, image, price, slug }) => {
   return (
@@ -42,38 +43,19 @@ const ProductCard = ({ discountPrice = null, title, image, price, slug }) => {
           </Typography>
           {discountPrice ? (
             <>
-              <Typography
-                variant="subtitle1"
-                component="span"
-                color="#ff8383"
-                sx={{ marginTop: "auto", display: "inline-block" }}
-                paddingRight={1}
-                fontWeight={600}
-              >
-                ₹{discountPrice}
-              </Typography>
-              <Typography
-                color="text.secondary"
-                variant="subtitle1"
-                component="span"
-                sx={{
-                  textDecoration: "line-through",
-                  fontSize: "14px",
-                }}
-              >
-                ₹{price}
-              </Typography>
+              <div className="flex items-end gap-1">
+                <span className="inline-block text-lg font-semibold bg-pink-600 rounded-lg px-1 text-white">
+                  ₹{discountPrice}
+                </span>
+                <span className="inline-block text-base line-through opacity-60">
+                  ₹{price}
+                </span>
+              </div>
             </>
           ) : (
-            <Typography
-              fontWeight={600}
-              variant="subtitle1"
-              component="span"
-              color="#ff8383"
-              sx={{ marginTop: "auto", display: "inline-block" }}
-            >
+            <span className="inline-block text-lg font-semibold bg-pink-600 rounded-lg px-1 text-white">
               ₹{price}
-            </Typography>
+            </span>
           )}
         </CardContent>
       </CardActionArea>
