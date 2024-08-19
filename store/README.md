@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+An ecommerce store built using NextJS and Firebase. This app provides seemless user experiance andfunctionality to order products from the ecommerce store.
+
+## Features
+
+1. Authentication
+   - the app provides seemless authentication to register user and saving user data such as orders and addresses.
+   - A secure authorization to check if the user is genuine or a fraud.
+2. Cart
+   - The ecommerce store has built in cart to manage users cart.
+   - User can checkout the cart anytime.
+3. Order
+   - Users can order desired goods by checking out the cart and place an order.
+   - They can see the list of ordered Items on "My orders" page.
 
 ## Getting Started
 
