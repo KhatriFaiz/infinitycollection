@@ -1,44 +1,22 @@
-import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
-const CategoryCard = ({ label, image }) => {
+const CategoryCard = ({ data }) => {
   return (
-    <Box
-      position="relative"
-      display="grid"
-      alignItems="end"
-      sx={{
-        "&::before": {
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          background: "linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0))",
-          content: `""`,
-          zIndex: -49,
-        },
-        aspectRatio: 1,
-      }}
+    <Link
+      href="#"
+      className="border aspect-[4/5] relative flex items-end group"
     >
-      <Image
-        src={image}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -99,
-          objectFit: "cover",
-        }}
-        alt={label}
-      />
-      <Typography
-        variant="subtitle1"
-        sx={{ color: "white", textAlign: "center", flexShrink: 0 }}
-      >
-        {label}
-      </Typography>
-    </Box>
+      <div className="w-full h-full absolute inset-0 -z-10 overflow-hidden">
+        <Image
+          src={data.image}
+          className="w-full h-full group-hover:scale-110 transition duration-300 ease-in object-cover"
+        />
+      </div>
+      <h3 className="text-white group-hover:-translate-y-5 transition duration-300 ease-in text-6xl font-bold px-5 py-10">
+        {data.title}
+      </h3>
+    </Link>
   );
 };
 
